@@ -3,14 +3,20 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider/AuthProvider";
 
 const Login = () => {
-    const AuthInfo = useContext(AuthContext);
-    console.log(AuthInfo);
+    const { signInUser } = useContext(AuthContext);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log(email, password);
+
+        signInUser(email, password)
+            .then(result => {
+                console.log(result);
+            })
+            .catch(error => {
+                console.error(error);
+            })
     }
     return (
         <div className="hero bg-base-200 min-h-screen">
